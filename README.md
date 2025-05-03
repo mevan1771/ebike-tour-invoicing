@@ -1,24 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# E-Bike Tour Invoicing System
+
+A modern, responsive dashboard for managing e-bike tour invoices, customers, and bookings. Built with Next.js and Tailwind CSS, optimized for Vercel deployment.
+
+## Features
+
+- **Dashboard Overview**: Get a quick view of total revenue, invoices, tours, and customers
+- **Invoice Management**: Create, view, and manage tour invoices
+- **Tour Scheduling**: Schedule and manage e-bike tours
+- **Customer Management**: Track customer information and booking history
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+
+## Tech Stack
+
+- **Framework**: Next.js 15
+- **Styling**: Tailwind CSS
+- **Icons**: React Icons & Heroicons
+- **Deployment**: Vercel-optimized
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/ebike-tour-invoicing.git
+cd ebike-tour-invoicing
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Run the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The easiest way to deploy this application is through Vercel:
+
+1. Push your code to a GitHub repository
+2. Visit [Vercel](https://vercel.com) and import your repository
+3. Vercel will automatically detect the Next.js application and configure the build settings
+4. Click "Deploy" 
+
+## Project Structure
+
+- `/app`: Main application code (Next.js App Router)
+- `/app/components`: Reusable UI components 
+- `/public`: Static assets
 
 ## Learn More
 
