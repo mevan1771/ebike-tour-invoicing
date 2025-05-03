@@ -28,7 +28,7 @@ A modern, responsive dashboard for managing e-bike tour invoices, customers, and
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/ebike-tour-invoicing.git
+git clone https://github.com/mevan1771/ebike-tour-invoicing.git
 cd ebike-tour-invoicing
 ```
 
