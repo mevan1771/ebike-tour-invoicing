@@ -32,11 +32,6 @@ export default function RatesStep({ tourData, onChange }: RatesStepProps) {
     { value: 'CHF', label: 'CHF - Swiss Franc' },
   ];
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    onChange({ [name]: value });
-  };
-
   const handleSelectChange = (name: string, value: string) => {
     onChange({ [name]: value });
   };
@@ -45,19 +40,19 @@ export default function RatesStep({ tourData, onChange }: RatesStepProps) {
     onChange({ [name]: value });
   };
 
-  const handleAdditionalServiceChange = (index: number, field: string, value: any) => {
+  const handleAdditionalServiceChange = (index: number, field: string, value: string | number) => {
     const updatedServices = [...tourData.additionalServices];
     if (field === 'name') {
       updatedServices[index] = { 
         ...updatedServices[index], 
-        name: value,
+        name: value as string,
         rate: updatedServices[index].rate
       };
     } else if (field === 'rate') {
       updatedServices[index] = {
         ...updatedServices[index], 
         name: updatedServices[index].name,
-        rate: value
+        rate: value as number
       };
     }
     onChange({ additionalServices: updatedServices });

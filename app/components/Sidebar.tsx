@@ -1,19 +1,19 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
+  FaBars, 
   FaTachometerAlt, 
   FaFileInvoiceDollar, 
   FaBicycle, 
   FaUsers, 
-  FaChartBar, 
+  FaCalendarAlt, 
+  FaChartLine, 
   FaCog, 
-  FaCalendarAlt,
-  FaChevronLeft,
-  FaChevronRight,
-  FaPlusCircle
+  FaChevronLeft, 
+  FaPlusCircle 
 } from 'react-icons/fa';
 
 interface SidebarProps {
@@ -21,99 +21,157 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ onCollapse }: SidebarProps) {
-  const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const pathname = usePathname();
 
-  const links = [
-    { name: 'Dashboard', href: '/dashboard', icon: <FaTachometerAlt /> },
-    { name: 'Invoices', href: '/invoices', icon: <FaFileInvoiceDollar /> },
-    { name: 'Tours', href: '/tours', icon: <FaBicycle /> },
-    { name: 'Customers', href: '/customers', icon: <FaUsers /> },
-    { name: 'Calendar', href: '/calendar', icon: <FaCalendarAlt /> },
-    { name: 'Reports', href: '/reports', icon: <FaChartBar /> },
-    { name: 'Settings', href: '/settings', icon: <FaCog /> },
-  ];
-
-  const toggleSidebar = () => {
-    const newCollapsedState = !collapsed;
-    setCollapsed(newCollapsedState);
+  const toggleCollapse = () => {
+    setCollapsed(!collapsed);
     if (onCollapse) {
-      onCollapse(newCollapsedState);
+      onCollapse(!collapsed);
     }
   };
 
+  const isActive = (path: string) => {
+    return pathname?.startsWith(path);
+  };
+
   return (
-    <div 
-      className={`bg-white h-screen shadow-md transition-all duration-300 ${
+    <aside 
+      className={`fixed top-0 left-0 h-full bg-white border-r border-gray-200 transition-all duration-300 z-10 ${
         collapsed ? 'w-16' : 'w-64'
-      } fixed left-0 top-0 z-10`}
+      }`}
     >
-      <div className="flex flex-col h-full">
-        {/* Logo and Title */}
-        <div className="flex items-center p-4 border-b border-gray-200">
-          <Link href="/dashboard" className="flex-shrink-0 flex items-center">
-            <FaBicycle className="h-8 w-8 text-primary-600" />
-            {!collapsed && (
-              <span className="ml-2 text-xl font-bold text-gray-800">E-Bike Tours</span>
-            )}
-          </Link>
+      <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
+        <div className={`flex items-center ${collapsed ? 'justify-center w-full' : ''}`}>
+          <div className="text-primary-600">
+            <FaBicycle className="h-6 w-6" />
+          </div>
+          
+          {!collapsed && (
+            <h1 className="ml-2 text-xl font-semibold text-gray-900">E-Bike Tours</h1>
+          )}
         </div>
         
-        {/* New Tour Button */}
-        <div className="px-4 py-3 border-b border-gray-200">
-          <Link 
-            href="/tours/new" 
-            className={`flex items-center justify-center p-2 rounded-lg bg-primary-600 hover:bg-primary-700 text-white shadow-sm transition-colors ${
-              collapsed ? 'w-8 h-8 mx-auto' : 'w-full'
-            }`}
-          >
-            <FaPlusCircle className={`${collapsed ? 'mx-auto' : 'mr-2'}`} />
-            {!collapsed && <span className="font-medium">New Tour</span>}
-            {collapsed && <span className="sr-only">New Tour</span>}
-          </Link>
-        </div>
-        
-        {/* Navigation Links */}
-        <div className="flex-1 py-6 overflow-y-auto">
-          <ul className="space-y-2 px-2">
-            {links.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className={`flex items-center p-2 rounded-lg ${
-                      isActive 
-                        ? 'bg-primary-50 text-primary-600' 
-                        : 'text-gray-600 hover:bg-gray-100'
-                    } transition-colors`}
-                  >
-                    <div className={`text-lg ${collapsed ? 'mx-auto' : ''}`}>{link.icon}</div>
-                    {!collapsed && (
-                      <span className="ml-3 font-medium">{link.name}</span>
-                    )}
-                    {collapsed && (
-                      <span className="sr-only">{link.name}</span>
-                    )}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        
-        {/* Collapse Button */}
-        <div className="p-4 border-t border-gray-200">
-          <button
-            onClick={toggleSidebar}
-            className="flex items-center justify-center w-full p-2 text-gray-500 rounded-lg hover:bg-gray-100"
-            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          >
-            {collapsed ? <FaChevronRight /> : <FaChevronLeft />}
-            {!collapsed && <span className="ml-2">Collapse</span>}
-          </button>
-        </div>
+        <button
+          onClick={toggleCollapse}
+          className={`text-gray-500 hover:text-gray-700 ${collapsed ? 'hidden' : ''}`}
+          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        >
+          <FaChevronLeft className="h-4 w-4" />
+        </button>
+
+        <button
+          onClick={toggleCollapse}
+          className={`text-gray-500 hover:text-gray-700 ${collapsed ? '' : 'hidden'}`}
+          aria-label="Expand sidebar"
+        >
+          <FaBars className="h-4 w-4" />
+        </button>
       </div>
-    </div>
+
+      <div className="p-4">
+        <div className={`mb-6 ${collapsed ? 'hidden' : ''}`}>
+          <Link
+            href="/tours/new"
+            className="w-full flex items-center justify-center px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
+          >
+            <FaPlusCircle className="mr-2" />
+            <span>New Tour</span>
+          </Link>
+        </div>
+
+        <div className={`${collapsed ? 'flex justify-center mb-6' : 'hidden'}`}>
+          <Link
+            href="/tours/new"
+            className="p-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
+            title="New Tour"
+          >
+            <FaPlusCircle className="h-5 w-5" />
+          </Link>
+        </div>
+
+        <nav className="space-y-1">
+          <NavItem
+            href="/dashboard"
+            icon={<FaTachometerAlt />}
+            label="Dashboard"
+            active={isActive('/dashboard')}
+            collapsed={collapsed}
+          />
+          
+          <NavItem
+            href="/invoices"
+            icon={<FaFileInvoiceDollar />}
+            label="Invoices"
+            active={isActive('/invoices')}
+            collapsed={collapsed}
+          />
+          
+          <NavItem
+            href="/tours"
+            icon={<FaBicycle />}
+            label="Tours"
+            active={isActive('/tours')}
+            collapsed={collapsed}
+          />
+          
+          <NavItem
+            href="/customers"
+            icon={<FaUsers />}
+            label="Customers"
+            active={isActive('/customers')}
+            collapsed={collapsed}
+          />
+          
+          <NavItem
+            href="/calendar"
+            icon={<FaCalendarAlt />}
+            label="Calendar"
+            active={isActive('/calendar')}
+            collapsed={collapsed}
+          />
+          
+          <NavItem
+            href="/reports"
+            icon={<FaChartLine />}
+            label="Reports"
+            active={isActive('/reports')}
+            collapsed={collapsed}
+          />
+          
+          <NavItem
+            href="/settings"
+            icon={<FaCog />}
+            label="Settings"
+            active={isActive('/settings')}
+            collapsed={collapsed}
+          />
+        </nav>
+      </div>
+    </aside>
+  );
+}
+
+interface NavItemProps {
+  href: string;
+  icon: React.ReactNode;
+  label: string;
+  active: boolean;
+  collapsed: boolean;
+}
+
+function NavItem({ href, icon, label, active, collapsed }: NavItemProps) {
+  return (
+    <Link
+      href={href}
+      className={`flex items-center px-2 py-2 rounded-md ${
+        active
+          ? 'bg-primary-50 text-primary-600'
+          : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+      } ${collapsed ? 'justify-center' : ''}`}
+    >
+      <div className="text-lg">{icon}</div>
+      {!collapsed && <span className="ml-3 text-sm font-medium">{label}</span>}
+    </Link>
   );
 } 

@@ -21,7 +21,7 @@ export default function ToursPage() {
       <div className="bg-white shadow overflow-hidden sm:rounded-md">
         <div className="px-4 py-16 text-center">
           <p className="text-gray-500 text-lg">
-            No tours to display yet. Create your first tour by clicking the "New Tour" button.
+            No tours to display yet. Create your first tour by clicking the &quot;New Tour&quot; button.
           </p>
         </div>
       </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { FaHashtag, FaCalendarAlt, FaBicycle } from 'react-icons/fa';
+import { FaHashtag, FaBicycle } from 'react-icons/fa';
 import FormInput from '../../components/FormInput';
 import DatePickerInput from '../../components/DatePickerInput';
 import { TourData } from './page';

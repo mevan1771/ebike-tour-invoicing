@@ -1,37 +1,35 @@
-import React from 'react';
+'use client';
+
+import React, { ReactNode } from 'react';
 
 interface PlaceholderPageProps {
   title: string;
-  description?: string;
-  icon?: React.ReactNode;
+  description: string;
+  icon?: ReactNode;
 }
 
 export default function PlaceholderPage({ 
-  title, 
-  description = 'This page is under construction. Check back soon for updates!',
+  title,
+  description,
   icon
 }: PlaceholderPageProps) {
   return (
-    <>
-      <div className="mb-6">
-        <div className="flex items-center">
-          {icon && <div className="mr-2 text-primary-600">{icon}</div>}
-          <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
+    <div className="bg-white shadow rounded-lg p-8 text-center">
+      <div className="flex flex-col items-center justify-center space-y-4">
+        {icon && (
+          <div className="h-16 w-16 rounded-full bg-primary-100 flex items-center justify-center text-primary-600">
+            {icon}
+          </div>
+        )}
+        
+        <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
+        
+        <p className="text-gray-500 max-w-md">{description}</p>
+        
+        <div className="mt-8 text-sm text-gray-500">
+          This section is under development. We&apos;re working hard to make it available soon!
         </div>
-        <p className="text-gray-500 mt-1">{description}</p>
       </div>
-      
-      <div className="bg-white rounded-lg shadow-sm p-8 text-center">
-        <div className="mb-4 text-gray-400">
-          <svg className="w-16 h-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-          </svg>
-        </div>
-        <h2 className="text-xl font-medium text-gray-900 mb-2">Coming Soon</h2>
-        <p className="text-gray-500">
-          We're working on building this feature. It will be available in a future update.
-        </p>
-      </div>
-    </>
+    </div>
   );
 } 

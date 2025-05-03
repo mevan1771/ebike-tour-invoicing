@@ -100,7 +100,7 @@ export default function GroupDetailsStep({ tourData, onChange }: GroupDetailsSte
               </div>
               <div className="ml-3">
                 <p className="text-sm text-yellow-700">
-                  <span className="font-medium">Note:</span> You've allocated more beds than riders. There are {(tourData.singleRooms + (tourData.doubleRooms * 2)) - tourData.numberOfRiders} extra beds.
+                  <span className="font-medium">Note:</span> You&apos;ve allocated more beds than riders. There are {(tourData.singleRooms + (tourData.doubleRooms * 2)) - tourData.numberOfRiders} extra beds.
                 </p>
               </div>
             </div>

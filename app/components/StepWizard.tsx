@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { FaCheck, FaCircle } from 'react-icons/fa';
+import { FaCheck } from 'react-icons/fa';
 
 interface StepWizardProps {
   steps: string[];
